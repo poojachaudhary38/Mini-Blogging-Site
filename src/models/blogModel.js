@@ -1,5 +1,6 @@
-const mongoose= require('mongoose');
-const { stringify } = require('querystring');
+const mongoose= require('mongoose'); 
+const ObjectId  = mongoose.Schema.Types.ObjectId;
+
 const blogSchema = new mongoose.Schema(
     { title:
         {
@@ -8,22 +9,23 @@ const blogSchema = new mongoose.Schema(
         },
      body:
      {
+        type: String,
         required: true
     },
      authorId: 
       {
         type: ObjectId,
-        ref: "Author"
+        ref: "Author",
+        required: true
      },
 
-    tags: [{type: String}],
+    tags: [String],
     category: 
        {
         type: String,
         required: true
     },
-       subcategory:[{type: String}], 
-       // examples[technology-[web development, mobile development, AI, ML etc]] },  
+       subcategory:[String],   
         deletedAt: 
          {
             type: Date,
@@ -31,7 +33,7 @@ const blogSchema = new mongoose.Schema(
             },
          isDeleted:
         {
-            type: boolean, 
+            type: Boolean, 
             default: false
         }, 
          publishedAt:
@@ -41,7 +43,7 @@ const blogSchema = new mongoose.Schema(
             },
           isPublished: 
           {
-            type: boolean, 
+            type: Boolean, 
             default: false
         }
     }, {timestamps: true });
